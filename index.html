@@ -607,13 +607,10 @@
             startOverlay.style.opacity = '0';
             setTimeout(() => startOverlay.remove(), 800);
             
-            // Unlock audio so it can be played later without being blocked by browser
+            // Play audio immediately upon entering the site (works 100% on mobile)
             const audio = document.getElementById('bg-music');
             if(audio) {
-                audio.play().then(() => {
-                    audio.pause(); // Pause immediately, we just wanted to unlock it!
-                    audio.currentTime = 0;
-                }).catch(e => console.log(e));
+                audio.play().catch(e => console.log(e));
             }
         });
 
@@ -648,7 +645,7 @@
             let currentYear = now.getFullYear();
             
             // Set target to TODAY at 8:35 PM (20:39:00) for testing!
-            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 20, 48, 0);
+            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 20, 58, 0);
 
             // If we have reached the exact time (or up to 24 hours after), show the celebration message!
             if (now >= birthday && now.getTime() - birthday.getTime() < 24 * 60 * 60 * 1000) {
