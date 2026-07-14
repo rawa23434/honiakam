@@ -17,12 +17,12 @@
         :root {
             --primary: #f8c8d8;
             --secondary: #e2b4bd;
-            --accent: #b5838d;
-            --text-dark: #5c4d51;
+            --accent: #6a1a41; /* Deep plum / mahogany for high visibility */
+            --text-dark: #2c2527; /* Dark charcoal for readable text */
             --text-light: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.3);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --glass-shadow: 0 8px 32px 0 rgba(181, 131, 141, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.65); /* More opaque for better contrast */
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(106, 26, 65, 0.2);
         }
 
         * {
@@ -85,8 +85,8 @@
         h2,
         h3 {
             font-family: 'Dancing Script', cursive;
-            color: var(--text-light);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+            color: var(--accent); /* Deeper text color */
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9), 2px 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for standout */
         }
 
         section {
@@ -110,22 +110,18 @@
             line-height: 1.1;
             margin-bottom: 1rem;
             animation: fadeInDown 1.5s ease-out;
-            background: linear-gradient(to right, #fff, #ffe4eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: none;
-            /* remove shadow for gradient text */
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+            color: var(--accent);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8), 2px 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .hero p {
             font-size: 1.5rem;
-            color: var(--text-light);
-            font-weight: 300;
+            color: var(--text-dark);
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: fadeInUp 1.5s ease-out 0.5s both;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
         }
 
         /* Floating Hearts Animation */
@@ -224,7 +220,7 @@
 
         .time-box span {
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-top: 0.8rem;
@@ -317,6 +313,7 @@
             text-align: justify;
             position: relative;
             z-index: 1;
+            font-weight: 500;
         }
 
         .letter-content p {
@@ -516,7 +513,7 @@
 
     <!-- === Countdown Section === -->
     <section class="countdown-section reveal">
-        <h2>Counting down to your day</h2>
+        
         <div class="countdown-container">
             <div class="glass time-box">
                 <div class="num" id="days">00</div>
@@ -581,16 +578,11 @@
                     Edit the paragraphs below to write your own personalized message. 
                 -->
 
-                <p>Happy Birthday! Today is entirely about you, and I wanted to create this little space to show you
-                    just how much you mean to me.</p>
+                <p>یادی لەدایکبوونت پیرۆز بێت! ئەمڕۆ تەنها و تەنها هی تۆیە، ویستم ئەم وێبسایتە دروست بکەم  تا پێت بڵێم چەندە گرنگی بۆ من</p>
 
-                <p>From the moment you entered my life, everything became brighter, more beautiful, and infinitely
-                    better. Your smile lights up my world, and your kindness warms my heart every single day. I am so
-                    incredibly lucky to have you.</p>
+                <p>لەو ساتەوەی هاتیتە ژیانی من، هەموو شتێک گەشاوەتر، جوانتر و بێسنوور باشتر بوو. زەردەخەنەکەت دنیای من ڕۆشن دەکاتەوە و میهرەبانییەکەت هەموو ڕۆژێک دڵم گەرم دەکات. زۆر بەختەوەر و بەختیم کە تۆم هەیە</p>
 
-                <p>I cherish all the beautiful memories we've made together, and I cannot wait to create countless more.
-                    May this birthday bring you as much joy, peace, and happiness as you bring into my life. You deserve
-                    nothing but the absolute best.</p>
+                <p>هەموو ئەو ساتە خۆشانەی پێکەوە دروستمان کردووە لە دڵمدا هەڵیان دەگرم و بەتەمام هەزاران ساتی تریش پێکەوە دروست بکەین. هیوادارم ئەم یادە هێندەی ئەو دڵخۆشی و ئارامییەی تۆ بە ژیانی منی دەبەخشیت، خۆشی و ئاشتی بۆ خۆت بهێنێت. تۆ شایەنی باشترین شتی لەم دونیایەدا.</p>
 
             </div>
             <div class="signature">With all my love,<br>Yours Forever</div>
