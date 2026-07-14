@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Honia</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Resets & Variables */
+        :root {
+            --primary: #f8c8d8;
+            --secondary: #e2b4bd;
+            --accent: #b5838d;
+            --text-dark: #5c4d51;
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(181, 131, 141, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            /* Fallback background */
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* 
+           Fixed Background Image 
+           [PUT YOUR BACKGROUND IMAGE HERE]
+        */
+        .fixed-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('background.jpg');
+            /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        /* Romantic Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(248, 200, 216, 0.5), rgba(181, 131, 141, 0.4));
+            z-index: -1;
+            backdrop-filter: blur(4px);
+            /* Slight blur to the background for depth */
+        }
+
+        /* Glassmorphism Reusable Class */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--text-light);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            position: relative;
+            width: 100%;
+        }
+
+        /* === Hero Section === */
+        .hero {
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.5s ease-out;
+            background: linear-gradient(to right, #fff, #ffe4eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            /* remove shadow for gradient text */
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Floating Hearts Animation */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: rotate(45deg);
+            animation: float 6s ease-in infinite;
+            filter: drop-shadow(0 2px 4px rgba(255, 192, 203, 0.5));
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -12px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -12px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg) scale(0.5);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(45deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* === Countdown Section === */
+        .countdown-section h2 {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 140px;
+            height: 140px;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .time-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .time-box .num {
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .time-box span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        /* === Gallery Section === */
+        .gallery-section h2 {
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            /* gives a polaroid/frame effect with the glass class */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(181, 131, 141, 0.4);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* === Love Letter Section === */
+        .letter-section {
+            padding-bottom: 8rem;
+            /* Extra space to prevent overlap with music player */
+        }
+
+        .letter-card {
+            max-width: 800px;
+            width: 90%;
+            padding: 5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-card::before {
+            content: '”';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: serif;
+            font-size: 10rem;
+            color: rgba(255, 255, 255, 0.3);
+            line-height: 1;
+        }
+
+        .letter-card h2 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            text-align: left;
+            text-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-content {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            text-align: justify;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--accent);
+            text-align: right;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* === Music Player === */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+
+        .music-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 25px rgba(181, 131, 141, 0.4);
+        }
+
+        /* Pulsing animation when music is playing */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        .playing {
+            animation: pulse 2s infinite;
+        }
+
+        /* Content Lock */
+        .content-locked {
+            display: none !important;
+        }
+
+        /* === Scroll Reveal Animations === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframes */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .countdown-section h2,
+            .gallery-section h2 {
+                font-size: 3rem;
+            }
+
+            .time-box {
+                width: 100px;
+                height: 100px;
+            }
+
+            .time-box .num {
+                font-size: 2rem;
+            }
+
+            .time-box span {
+                font-size: 0.7rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .letter-card {
+                padding: 3rem 2rem;
+            }
+
+            .letter-card h2 {
+                font-size: 3rem;
+            }
+
+            .letter-content {
+                font-size: 1.1rem;
+            }
+
+            .music-player {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .music-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 
+        [BACKGROUND IMAGE]
+        To change the background, see the .fixed-bg class in the CSS above 
+    -->
+    <div class="fixed-bg"></div>
+    <div class="overlay"></div>
+
+    <!-- 
+        [PUT YOUR MUSIC FILE HERE]
+        Replace 'music.mp3' with your audio file's name. 
+    -->
+    <audio src="_اليسا وسعد لمجرد - من أول دقيقة.mp3" id="bg-music" loop></audio>
+
+    <!-- Overlay to unlock Audio -->
+    <div id="start-overlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index:9999; display:flex; justify-content:center; align-items:center; cursor:pointer;">
+        <h1 style="color:white; font-family:'Dancing Script', cursive; font-size:3.5rem; text-align:center; animation: pulse 2s infinite;">
+            ✨ Tap anywhere to enter ✨<br>
+            <span style="font-size:1.5rem; font-family:'Outfit', sans-serif; opacity:0.8;">(Please turn your sound on 🔊)</span>
+        </h1>
+    </div>
+
+    <!-- === Hero Section === -->
+    <section class="hero content-locked" id="home">
+        <div class="hearts-container" id="hearts-container"></div>
+        <h1>Happy Birthday Honia</h1>
+        <p>To the most beautiful girl in the world</p>
+    </section>
+
+    <!-- === Countdown Section === -->
+    <section class="countdown-section reveal">
+        <h2>Counting down to your day</h2>
+        <div class="countdown-container">
+            <div class="glass time-box">
+                <div class="num" id="days">00</div>
+                <span>Days</span>
+            </div>
+            <div class="glass time-box">
+                <div class="num" id="hours">00</div>
+                <span>Hours</span>
+            </div>
+            <div class="glass time-box">
+                <div class="num" id="minutes">00</div>
+                <span>Minutes</span>
+            </div>
+            <div class="glass time-box">
+                <div class="num" id="seconds">00</div>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- === Gallery Section === -->
+    <section class="gallery-section reveal content-locked">
+        <h2>Our Beautiful Memories</h2>
+        <div class="gallery-grid">
+
+            <!-- 
+                [PUT YOUR PHOTOS HERE]
+                Replace 'photo1.jpg' to 'photo6.jpg' with your actual image file names.
+                Make sure the images are in the same folder as this HTML file.
+            -->
+
+            <div class="gallery-item glass">
+                <img src="photo1.jpg" alt="Memory 1">
+            </div>
+            <div class="gallery-item glass">
+                <img src="photo2.jpg" alt="Memory 2">
+            </div>
+            <div class="gallery-item glass">
+                <img src="photo3.jpg" alt="Memory 3">
+            </div>
+            <div class="gallery-item glass">
+                <img src="photo4.jpg" alt="Memory 4">
+            </div>
+            <div class="gallery-item glass">
+                <img src="photo5.jpg" alt="Memory 5">
+            </div>
+            <div class="gallery-item glass">
+                <img src="photo6.jpg" alt="Memory 6">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- === Love Letter Section === -->
+    <section class="letter-section reveal content-locked">
+        <div class="glass letter-card">
+            <h2>My Dearest Honia,</h2>
+            <div class="letter-content">
+
+                <!-- 
+                    [PUT YOUR LOVE LETTER HERE]
+                    Edit the paragraphs below to write your own personalized message. 
+                -->
+
+                <p>Happy Birthday! Today is entirely about you, and I wanted to create this little space to show you
+                    just how much you mean to me.</p>
+
+                <p>From the moment you entered my life, everything became brighter, more beautiful, and infinitely
+                    better. Your smile lights up my world, and your kindness warms my heart every single day. I am so
+                    incredibly lucky to have you.</p>
+
+                <p>I cherish all the beautiful memories we've made together, and I cannot wait to create countless more.
+                    May this birthday bring you as much joy, peace, and happiness as you bring into my life. You deserve
+                    nothing but the absolute best.</p>
+
+            </div>
+            <div class="signature">With all my love,<br>Yours Forever</div>
+        </div>
+    </section>
+
+    <!-- === JavaScript Logic === -->
+    <script>
+        // --- 0. Audio Unlocker ---
+        const startOverlay = document.getElementById('start-overlay');
+        startOverlay.addEventListener('click', () => {
+            // Fade out the overlay
+            startOverlay.style.transition = 'opacity 0.8s ease';
+            startOverlay.style.opacity = '0';
+            setTimeout(() => startOverlay.remove(), 800);
+            
+            // Unlock audio so it can be played later without being blocked by browser
+            const audio = document.getElementById('bg-music');
+            if(audio) {
+                audio.play().then(() => {
+                    audio.pause(); // Pause immediately, we just wanted to unlock it!
+                    audio.currentTime = 0;
+                }).catch(e => console.log(e));
+            }
+        });
+
+        // --- 1. Floating Hearts Animation ---
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 20; // Number of floating hearts
+
+            for (let i = 0; i < heartCount; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+
+                // Randomize horizontal position, animation duration, delay, and size
+                let leftPos = Math.random() * 100;
+                let animDuration = 5 + Math.random() * 8; // between 5s and 13s
+                let delay = Math.random() * 5;
+                let scale = 0.4 + Math.random() * 0.8;
+
+                heart.style.left = leftPos + '%';
+                heart.style.animationDuration = animDuration + 's';
+                heart.style.animationDelay = delay + 's';
+                heart.style.transform = `scale(${scale}) rotate(45deg)`;
+
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // --- 2. Countdown Timer ---
+        function updateCountdown() {
+            const now = new Date();
+            let currentYear = now.getFullYear();
+            
+            // Set target to TODAY at 8:35 PM (20:39:00) for testing!
+            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 20, 42, 0);
+
+            // If we have reached the exact time (or up to 24 hours after), show the celebration message!
+            if (now >= birthday && now.getTime() - birthday.getTime() < 24 * 60 * 60 * 1000) {
+                // Unlock all hidden content
+                document.querySelectorAll('.content-locked').forEach(el => el.classList.remove('content-locked'));
+
+                const container = document.querySelector('.countdown-container');
+                if (container) {
+                    container.innerHTML = `<div style="font-size: 4rem; color: #fff; font-family: 'Dancing Script', cursive; text-align: center; animation: pulse 2s infinite; text-shadow: 2px 2px 8px rgba(0,0,0,0.2);">🎉 IT'S YOUR BIRTHDAY! 🎉<br><span style="font-size: 2rem; font-family: 'Outfit', sans-serif; text-shadow: none;">Have the most wonderful day!</span></div>`;
+                }
+                
+                // Trigger scroll reveal for newly unlocked content
+                if (typeof reveal === 'function') reveal();
+                
+                // Play music immediately
+                const audio = document.getElementById('bg-music');
+                if (audio && audio.paused) {
+                    audio.play(); // Play directly without waiting for scroll
+                }
+                
+                return; // Stop the countdown logic
+            }
+
+            // If it's been more than 24 hours since the birthday, count down to next year's 10 PM
+            if (now >= new Date(birthday.getTime() + 24 * 60 * 60 * 1000)) {
+                birthday = new Date(currentYear + 1, 7, 2, 22, 0, 0);
+            }
+
+            const diff = birthday - now;
+
+            // Time calculations
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / 1000 / 60) % 60);
+            const s = Math.floor((diff / 1000) % 60);
+
+            // Update DOM with leading zeros if needed
+            document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run immediately so it doesn't show 00 briefly
+
+        // --- 3. Scroll Reveal Animation ---
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 120; // Trigger point
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', reveal);
+        reveal(); // Trigger on initial load
+
+
+    </script>
+</body>
+
+</html>
