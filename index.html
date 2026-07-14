@@ -607,10 +607,13 @@
             startOverlay.style.opacity = '0';
             setTimeout(() => startOverlay.remove(), 800);
             
-            // Play audio immediately upon entering the site (works 100% on mobile)
+            // Just unlock audio permission - DO NOT play yet. Music plays only when countdown ends!
             const audio = document.getElementById('bg-music');
             if(audio) {
-                audio.play().catch(e => console.log(e));
+                audio.play().then(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }).catch(e => console.log(e));
             }
         });
 
