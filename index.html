@@ -653,7 +653,7 @@
             // Note: Month is 0-indexed (0 = Jan, 1 = Feb, ..., 7 = Aug).
             // Example: new Date(2025, 7, 2, 22, 0, 0) is August 2nd, 2025 at 10:00 PM.
             // Currently set to today at 19:00:00 for testing. Change the numbers below to test your own time.
-            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 19, 11, 0);
+            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 19, 26, 0);
 
             // If we have reached the exact time (or up to 24 hours after), show the celebration message!
             if (now >= birthday && now.getTime() - birthday.getTime() < 24 * 60 * 60 * 1000) {
