@@ -546,22 +546,22 @@
             -->
 
             <div class="gallery-item glass">
-                <img src="photo1.jpg" alt="Memory 1">
+                <img src="IMG_4476.PNG" alt="Memory 1">
             </div>
             <div class="gallery-item glass">
-                <img src="photo2.jpg" alt="Memory 2">
+                <img src="IMG_4490.PNG" alt="Memory 2">
             </div>
             <div class="gallery-item glass">
-                <img src="photo3.jpg" alt="Memory 3">
+                <img src="IMG_4478.jpg" alt="Memory 3">
             </div>
             <div class="gallery-item glass">
-                <img src="photo4.jpg" alt="Memory 4">
+                <img src="IMG_4485.jpg" alt="Memory 4">
             </div>
             <div class="gallery-item glass">
-                <img src="photo5.jpg" alt="Memory 5">
+                <img src="IMG_4487.jpg" alt="Memory 5">
             </div>
             <div class="gallery-item glass">
-                <img src="photo6.jpg" alt="Memory 6">
+                <img src="D.png" alt="Memory 6">
             </div>
 
         </div>
@@ -591,27 +591,37 @@
 
     <!-- === JavaScript Logic === -->
     <script>
+        let hasInteracted = false;
+        let isBirthday = false;
+
         // --- 0. Audio Unlocker ---
         const startOverlay = document.getElementById('start-overlay');
         startOverlay.addEventListener('click', () => {
+            hasInteracted = true;
             // Fade out the overlay
             startOverlay.style.transition = 'opacity 0.8s ease';
             startOverlay.style.opacity = '0';
             setTimeout(() => startOverlay.remove(), 800);
             
-            // Just unlock audio permission - DO NOT play yet. Music plays only when countdown ends!
+            // Unlock audio or play if countdown is already finished
             const audio = document.getElementById('bg-music');
             if(audio) {
-                audio.play().then(() => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                }).catch(e => console.log(e));
+                if (isBirthday) {
+                    audio.play().catch(e => console.log(e));
+                } else {
+                    // Unlock audio permission - DO NOT play yet. Music plays only when countdown ends!
+                    audio.play().then(() => {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }).catch(e => console.log(e));
+                }
             }
         });
 
         // --- 1. Floating Hearts Animation ---
         function createHearts() {
             const container = document.getElementById('hearts-container');
+            if (!container) return;
             const heartCount = 20; // Number of floating hearts
 
             for (let i = 0; i < heartCount; i++) {
@@ -639,12 +649,17 @@
             const now = new Date();
             let currentYear = now.getFullYear();
             
-            // Set target to TODAY at 8:35 PM (20:39:00) for testing!
-            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 21, 8, 0);
+            // Set target date here. 
+            // Note: Month is 0-indexed (0 = Jan, 1 = Feb, ..., 7 = Aug).
+            // Example: new Date(2025, 7, 2, 22, 0, 0) is August 2nd, 2025 at 10:00 PM.
+            // Currently set to today at 19:00:00 for testing. Change the numbers below to test your own time.
+            let birthday = new Date(currentYear, now.getMonth(), now.getDate(), 19, 11, 0);
 
             // If we have reached the exact time (or up to 24 hours after), show the celebration message!
             if (now >= birthday && now.getTime() - birthday.getTime() < 24 * 60 * 60 * 1000) {
-                // Unlock all hidden content
+                isBirthday = true;
+                
+                // Unlock all hidden content securely
                 document.querySelectorAll('.content-locked').forEach(el => el.classList.remove('content-locked'));
 
                 const container = document.querySelector('.countdown-container');
@@ -655,16 +670,19 @@
                 // Trigger scroll reveal for newly unlocked content
                 if (typeof reveal === 'function') reveal();
                 
-                // Play music immediately
-                const audio = document.getElementById('bg-music');
-                if (audio && audio.paused) {
-                    audio.play(); // Play directly without waiting for scroll
+                // Play music immediately, BUT ONLY if user has clicked the "Tap anywhere to enter" overlay.
+                // This guarantees mobile and PC won't block the audio playback.
+                if (hasInteracted) {
+                    const audio = document.getElementById('bg-music');
+                    if (audio && audio.paused) {
+                        audio.play().catch(e => console.log(e));
+                    }
                 }
                 
                 return; // Stop the countdown logic
             }
 
-            // If it's been more than 24 hours since the birthday, count down to next year's 10 PM
+            // If it's been more than 24 hours since the birthday, count down to next year
             if (now >= new Date(birthday.getTime() + 24 * 60 * 60 * 1000)) {
                 birthday = new Date(currentYear + 1, 7, 2, 22, 0, 0);
             }
@@ -702,8 +720,6 @@
         }
         window.addEventListener('scroll', reveal);
         reveal(); // Trigger on initial load
-
-
     </script>
 </body>
 
